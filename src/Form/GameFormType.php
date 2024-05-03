@@ -2,28 +2,33 @@
 
 namespace App\Form;
 
+use App\Entity\Game;
 use App\Entity\Offers;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class OfferFormType extends AbstractType
+class GameFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
-            ->add('price')
-            ->add('offerLink')
-            ->add('submit', SubmitType::class)
+            ->add('offers', EntityType::class, [
+                'class' => Offers::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+            ])
+            ->add('submit',SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Offers::class,
+            'data_class' => Game::class,
         ]);
     }
 }

@@ -19,6 +19,12 @@ class Offers
     #[ORM\Column(length: 255)]
     private ?string $offerLink = null;
 
+    #[ORM\ManyToOne(inversedBy: 'offers')]
+    private ?Game $game = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +50,30 @@ class Offers
     public function setOfferLink(string $offerLink): static
     {
         $this->offerLink = $offerLink;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): static
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
