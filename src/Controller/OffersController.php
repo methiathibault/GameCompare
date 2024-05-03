@@ -18,7 +18,7 @@ class OffersController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
 
-        $myoffers = $em -> getRepository(offers::class)-> findAll();
+        $myoffers = $em -> getRepository(Offers::class)-> findAll();
         return $this->render('offers/index.html.twig', [
             'controller_name' => 'OffersController',
             'offers' => $myoffers,
