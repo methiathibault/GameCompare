@@ -14,20 +14,20 @@
      <div class='container'>
         <table class='table table-bordered border-dark'>
             <tr>
-                <td>id</td>
+                <td>Offers</td>
                 <td>Games</td>
-                <td>Action</td>
+                <td>Prix</td>
+                <td>Offer Link</td>
             </tr>
-                {% for game in games %}
+                {% for offer in offers %}
                     <tr>
-                        <td>{{game.id}}</td>
-                        <td>{{game.name}}</td>
+                        <td>{{offer.name}}</td>
+                        <td>{{offer.game.name}}</td>
+                        <td>{{offer.price}} €</td>
                         <td>
-                        {# {{game.offers.price}} #}
-                            {% for offer in game.offers %}
-                                {{offer.id}}
-                            {% endfor %}
+                            <a href='{{offer.offerLink}}'>Go to site</a>
                         </td>
+                    </tr>
                 {% endfor %}
         </table>
 </div>
