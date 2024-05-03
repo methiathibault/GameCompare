@@ -1,0 +1,41 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+    <h1>{{controller_name}}</h1>
+    <div class='container'>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>id</td>
+                <td>PRIX</td>
+                <td>Liens vers l'offre</td>
+            </tr>
+                {% for offer in offers %}
+                    <tr>
+                        <td>{{offer.id}}</td>
+                        <td>
+                           
+                            {{offer.price}} €
+                           
+                        </td>
+                        <td>{{offer.offerLink}}</td>
+                        
+                        <td>
+                            <form action='/offers/delete/{{offer.id}}'>
+                                <input type='submit' value='Delete'/>
+                            </form>
+                           
+                        </td>
+                    </tr>
+                {% endfor %}
+        </table>
+        <form action='offers/deleteall'>
+            <input type='submit' value='Delete All'/>
+        </form>
+         <form action='/game'>
+            <input type='submit' value='Go to Game pages'/>
+        </form>
+    </div>
+{% endblock %}
