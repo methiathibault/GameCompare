@@ -26,25 +26,17 @@ class OffersController extends AbstractController
     }
 
 
-    #[Route('/offers/add', name: 'offers_add')]
-    public function add(EntityManagerInterface $em): Response
-    {
-        
-        $myOffer = new Offers();
-        $myOffer->setPrice("55.99");
-        $myOffer->setOfferLink("https://gg.deals/");
-        $em ->persist($myOffer);
-        $em -> flush();
-
-
-        return $this->redirectToRoute('offers');
-    }
-
     #[Route('/offers/delete/{id}', name: 'offers_delete')]
-    public function delete(EntityManagerInterface $em,$id): Response
+    public function delete(EntityManagerInterface $em,int $id): Response
     {
         
         $offerToDelete = $em -> getRepository(offers::class)-> find($id);
+        
+        if (!$offerToDelete) {
+                    throw $this->createNotFoundException(
+                'No offer found'
+            );
+        }
         
         $em->remove($offerToDelete);
         $em->flush();
@@ -57,6 +49,13 @@ class OffersController extends AbstractController
     {
         
         $allOffers = $em -> getRepository(offers::class)-> findAll();
+        
+        if (!$allOffers) {
+                    throw $this->createNotFoundException(
+                'No offer found'
+            );
+        }
+
         foreach ($allOffers as $offer){
             $em->remove($offer);
             $em->flush();

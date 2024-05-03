@@ -9,8 +9,8 @@
         <table class='table table-bordered border-dark'>
             <tr>
                 <td>id</td>
-                <td>PRIX</td>
-                <td>Liens vers l'offre</td>
+                <td>Price</td>
+                <td>Link to offer</td>
             </tr>
                 {% for offer in offers %}
                     <tr>
@@ -36,6 +36,10 @@
         </form>
          <form action='/game'>
             <input type='submit' value='Go to Game pages'/>
+        </form>
+
+        <form action='/offers/create'>
+            <input type='submit' value='Ajouter une offre'/>
         </form>
     </div>
 {% endblock %}
