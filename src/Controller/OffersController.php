@@ -18,7 +18,7 @@ class OffersController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
 
-        $myoffers = $em -> getRepository(offers::class)-> findAll();
+        $myoffers = $em -> getRepository(Offers::class)-> findAll();
         return $this->render('offers/index.html.twig', [
             'controller_name' => 'OffersController',
             'offers' => $myoffers,
@@ -33,7 +33,7 @@ class OffersController extends AbstractController
         $offerToDelete = $em -> getRepository(offers::class)-> find($id);
         
         if (!$offerToDelete) {
-                    throw $this->createNotFoundException(
+            throw $this->createNotFoundException(
                 'No offer found'
             );
         }
@@ -51,7 +51,7 @@ class OffersController extends AbstractController
         $allOffers = $em -> getRepository(offers::class)-> findAll();
         
         if (!$allOffers) {
-                    throw $this->createNotFoundException(
+            throw $this->createNotFoundException(
                 'No offer found'
             );
         }
@@ -74,7 +74,6 @@ class OffersController extends AbstractController
         $form =   $this->createForm(OfferFormType::class, $newOffer);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-
             $offer= $form->getData();
             $em->persist($offer);
             $em->flush();
@@ -82,8 +81,6 @@ class OffersController extends AbstractController
 
         }
 
-       
-       
         return $this->render('offers/create.html.twig', [
             'controller_name' => 'OffersController',
             'form' => $form,
