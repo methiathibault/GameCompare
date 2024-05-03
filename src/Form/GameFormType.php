@@ -16,11 +16,6 @@ class GameFormType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('offers', EntityType::class, [
-                'class' => Offers::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-            ])
             ->add('submit',SubmitType::class)
         ;
     }
