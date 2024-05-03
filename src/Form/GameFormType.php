@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Game;
 use App\Entity\Offers;
+use App\Entity\Developers;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,6 +21,10 @@ class GameFormType extends AbstractType
                 'class' => Offers::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+            ])
+            ->add('developers', EntityType::class, [
+                'class' => Developers::class,
+                'choice_label' => 'developerName',
             ])
             ->add('submit',SubmitType::class)
         ;

@@ -24,6 +24,9 @@ class Game
     #[ORM\OneToMany(targetEntity: Offers::class, mappedBy: 'game')]
     private Collection $offers;
 
+    #[ORM\ManyToOne(inversedBy: 'developer')]
+    private ?Developers $developers = null;
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
@@ -72,6 +75,18 @@ class Game
                 $offer->setGame(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDevelopers(): ?Developers
+    {
+        return $this->developers;
+    }
+
+    public function setDevelopers(?Developers $developers): static
+    {
+        $this->developers = $developers;
 
         return $this;
     }
