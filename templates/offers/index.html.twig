@@ -9,19 +9,18 @@
         <table class='table table-bordered border-dark'>
             <tr>
                 <td>id</td>
+                <td>Offer name</td>
+                <td>Game name</td>
                 <td>Price</td>
                 <td>Link to offer</td>
             </tr>
                 {% for offer in offers %}
                     <tr>
                         <td>{{offer.id}}</td>
-                        <td>
-                           
-                            {{offer.price}} €
-                           
-                        </td>
+                        <td>{{offer.name}}</td>
+                        <td>{{offer.game.name}}</td>
+                        <td>{{offer.price}} €</td>
                         <td>{{offer.offerLink}}</td>
-                        
                         <td>
                             <form action='/offers/delete/{{offer.id}}'>
                                 <input type='submit' value='Delete'/>
