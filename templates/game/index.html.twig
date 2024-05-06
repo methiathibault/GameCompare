@@ -15,6 +15,11 @@
                     <tr>
                         <td>{{game.id}}</td>
                         <td>{{game.name}}</td>
+                         <td>
+                        {% for offer in game.offers %}
+                            {{ offer.name }}
+                        {% endfor %}
+                        <td> 
                         <td>
                             <form action='/game/delete/{{game.id}}'>
                                 <input type='submit' value='Delete'/>
