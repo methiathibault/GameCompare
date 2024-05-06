@@ -84,7 +84,7 @@ class PlateformsController extends AbstractController
             return $this->redirectToRoute('app_admin');
         }
 
-        return $this->render('game/create.html.twig',[
+        return $this->render('create.html.twig',[
             'controller_name' => 'GameController',
             'form' => $form,
         ]);
