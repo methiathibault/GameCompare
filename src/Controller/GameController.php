@@ -30,14 +30,14 @@ class GameController extends AbstractController
 
         if(!$game) {
             throw $this->createNotFoundException(
-                'No game found'
+                'No game found' .$id
             );
         }
 
         $em->remove($game);
         $em->flush();
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('game/deleteall', name: 'app_game_deleteall')]
@@ -56,7 +56,7 @@ class GameController extends AbstractController
             $em->flush();  
         }
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/game/create', name: 'app_game_create')]
@@ -72,10 +72,37 @@ class GameController extends AbstractController
             $game = $form->getData();
             $em->persist($game);
             $em->flush();
-            return $this->redirectToRoute('app_game');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('game/create.html.twig', [
+            'controller_name' => 'GameController',
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('game/update/{id}', name: 'app_game_update')]
+    public function update(EntityManagerInterface $em, int $id, Request $request): Response
+    {
+        $game = $em->getRepository(Game::class)->find($id);
+
+        if (!$game) {
+            throw $this->createNotFoundException(
+                'No game found' .$id
+            );
+        }
+
+        $form = $this->createForm(GameFormType::class, $game);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $game = $form->getData($game);
+            $em->persist($game);
+            $em->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('game/create.html.twig',[
             'controller_name' => 'GameController',
             'form' => $form,
         ]);

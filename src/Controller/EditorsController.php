@@ -36,7 +36,7 @@ class EditorsController extends AbstractController
             $editors = $form->getData();
             $em->persist($editors);
             $em->flush();
-            return $this->redirectToRoute('app_game');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('create.html.twig', [
@@ -60,7 +60,7 @@ class EditorsController extends AbstractController
         $em->remove($editor);
         $em->flush();
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/editors/update/{id}', name: 'app_editors_update')]

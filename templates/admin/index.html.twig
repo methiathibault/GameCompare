@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+    <div class='container'>
+        <h1>Admin page</h1>
+        <a href='/game/create' class="btn-primary btn" role='button'>Create game</a>
+        <a href='/offers/create' class="btn-primary btn" role='button'>Create offer</a>
+        <a href='/developers/create' class="btn-primary btn" role='button'>Create developer</a>
+        <a href='/editors/create'class="btn-primary btn" role='button'>Create editor</a>
+        <a href='/plateforms/create' class="btn-primary btn" role='button'>Create platform</a>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>Offers</td>
+                <td>Action</td>
+            </tr>
+            {% for offer in offers %}
+                <tr>
+                    <td>{{offer.name}} / Game: {{offer.game.name}}</td>
+                    <td>
+                        <a href='offers/delete/{{offer.id}}' class="btn-primary btn" role='button'>Delete</a>
+                        <a href='offers/update/{{offer.id}}' class="btn-primary btn" role='button'>Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>Games</td>
+                <td>Action</td>
+            </tr>
+            {% for game in games %}
+                <tr>
+                    <td>{{game.name}}</td>
+                    <td>
+                        <a href='game/delete/{{game.id}}' class="btn-primary btn" role='button'>Delete</a>
+                        <a href='game/update/{{game.id}}' class="btn-primary btn" role='button'>Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>Developers</td>
+                <td>Action</td>
+            </tr>
+            {% for developer in developers %}
+                <tr>
+                    <td>{{developer.developerName}}</td>
+                    <td>
+                        <a href='developers/delete/{{developer.id}}' class="btn-primary btn" role='button'>Delete</a>
+                        <a href='developers/update/{{developer.id}}' class="btn-primary btn" role='button'>Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>Editors</td>
+                <td>Action</td>
+            </tr>
+            {% for editor in editors %}
+                <tr>
+                    <td>{{editor.name}}</td>
+                    <td>
+                        <a href='editors/delete/{{editor.id}}' class="btn-primary btn" role='button'>Delete</a>
+                        <a href='editors/update/{{editor.id}}' class="btn-primary btn" role='button'>Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>Platforms</td>
+                <td>Action</td>
+            </tr>
+            {% for platform in platforms %}
+                <tr>
+                    <td>{{platform.name}}</td>
+                    <td>
+                        <a href='plateforms/delete/{{platform.id}}' class="btn-primary btn" role='button'>Delete</a>
+                        <a href='plateforms/update/{{platform.id}}' class="btn-primary btn" role='button'>Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
