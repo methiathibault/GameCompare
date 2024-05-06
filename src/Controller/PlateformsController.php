@@ -70,7 +70,7 @@ class PlateformsController extends AbstractController
 
         if (!$platform) {
             throw $this->createNotFoundException(
-                'No game found' .$id
+                'No platform found' .$id
             );
         }
 
