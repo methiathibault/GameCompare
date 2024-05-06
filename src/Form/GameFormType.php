@@ -23,18 +23,22 @@ class GameFormType extends AbstractType
                 'class' => NPlateforms::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'label' => 'Plateform',
                 
             ])
             ->add('developers', EntityType::class, [
                 'class' => Developers::class,
                 'choice_label' => 'developerName',
+                'label' => 'Development Team',
                 
             ])
             ->add('nEditors', EntityType::class, [
                 'class' => NEditors::class,
                 'choice_label' => 'name',
+                'label' => 'Editor',
                 
             ])
+            ->add('releaseDate')
             
             ->add('submit',SubmitType::class)
         ;

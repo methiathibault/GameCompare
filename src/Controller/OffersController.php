@@ -19,9 +19,6 @@ class OffersController extends AbstractController
     {
 
         $myoffers = $em -> getRepository(Offers::class)-> findAll();
-
-        //dd($myoffers);
-
         return $this->render('offers/index.html.twig', [
             'controller_name' => 'OffersController',
             'offers' => $myoffers,

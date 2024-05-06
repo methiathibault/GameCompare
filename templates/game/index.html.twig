@@ -16,14 +16,9 @@
                         <td>{{game.id}}</td>
                         <td>{{game.name}}</td>
                          <td>
-
-                        {# {{game.offers.offerLink|default('default_value') }} #}
-
                         {% for offer in game.offers %}
                             {{ offer.name }}
                         {% endfor %}
-                       
-                        
                         <td> 
                         <td>
                             <form action='/game/delete/{{game.id}}'>
