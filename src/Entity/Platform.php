@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\NPlateformsRepository;
+use App\Repository\PlatformRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: NPlateformsRepository::class)]
-class NPlateforms
+#[ORM\Entity(repositoryClass: PlatformRepository::class)]
+class Platform
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,12 +21,12 @@ class NPlateforms
     /**
      * @var Collection<int, Game>
      */
-    #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'nPlateforms')]
-    private Collection $plateform;
+    #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'platforms')]
+    private Collection $games;
 
     public function __construct()
     {
-        $this->plateform = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,23 +49,26 @@ class NPlateforms
     /**
      * @return Collection<int, Game>
      */
-    public function getPlateform(): Collection
+    public function getGames(): Collection
     {
-        return $this->plateform;
+        return $this->games;
     }
 
-    public function addPlateform(Game $plateform): static
+    public function addGame(Game $game): static
     {
-        if (!$this->plateform->contains($plateform)) {
-            $this->plateform->add($plateform);
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
+            $game->addPlatform($this);
         }
 
         return $this;
     }
 
-    public function removePlateform(Game $plateform): static
+    public function removeGame(Game $game): static
     {
-        $this->plateform->removeElement($plateform);
+        if ($this->games->removeElement($game)) {
+            $game->removePlatform($this);
+        }
 
         return $this;
     }

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\NPlateforms;
-use App\Form\PlateformsFormType; 
+use App\Entity\Platform;
+use App\Form\PlatformFormType; 
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,13 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class PlateformsController extends AbstractController
+class PlatformController extends AbstractController
 {
     #[Route('/plateforms', name: 'app_plateforms')]
     public function index(): Response
     {
         return $this->render('plateforms/index.html.twig', [
-            'controller_name' => 'PlateformsController',
+            'controller_name' => 'PlatformController',
         ]);
     }
 
@@ -26,9 +26,9 @@ class PlateformsController extends AbstractController
     public function create(EntityManagerInterface $em, Request $request): Response
     {
 
-        $plats = new NPlateforms();
+        $plats = new Platform();
 
-        $form = $this->createForm(PlateformsFormType::class, $plats);
+        $form = $this->createForm(PlatformFormType::class, $plats);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
@@ -49,7 +49,7 @@ class PlateformsController extends AbstractController
     #[Route('/plateforms/delete/{id}', name: 'app_plateforms_delete')]
     public function delete(EntityManagerInterface $em, int $id): Response
     {
-        $platform = $em->getRepository(NPlateforms::class)->find($id);
+        $platform = $em->getRepository(Platform::class)->find($id);
 
         if(!$platform) {
             throw $this->createNotFoundException(
@@ -66,7 +66,7 @@ class PlateformsController extends AbstractController
     #[Route('/plateforms/update/{id}', name: 'app_plateforms_update')]
     public function updatePlat(EntityManagerInterface $em, int $id, Request $request): Response
     {
-        $platform = $em->getRepository(NPlateforms::class)->find($id);
+        $platform = $em->getRepository(Platform::class)->find($id);
 
         if (!$platform) {
             throw $this->createNotFoundException(
@@ -74,7 +74,7 @@ class PlateformsController extends AbstractController
             );
         }
 
-        $form = $this->createForm(PlateformsFormType::class, $platform);
+        $form = $this->createForm(PlatformFormType::class, $platform);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) { 

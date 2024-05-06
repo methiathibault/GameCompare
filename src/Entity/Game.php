@@ -28,22 +28,22 @@ class Game
     #[ORM\ManyToOne(inversedBy: 'developer')]
     private ?Developers $developers = null;
 
-    /**
-     * @var Collection<int, NPlateforms>
-     */
-    #[ORM\ManyToMany(targetEntity: NPlateforms::class, mappedBy: 'plateform')]
-    private Collection $nPlateforms;
-
     #[ORM\ManyToOne(inversedBy: 'editor')]
     private ?NEditors $nEditors = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $releaseDate = null;
 
+    /**
+     * @var Collection<int, Platform>
+     */
+    #[ORM\ManyToMany(targetEntity: Platform::class, inversedBy: 'games')]
+    private Collection $platforms;
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
-        $this->nPlateforms = new ArrayCollection();
+        $this->platforms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,33 +105,6 @@ class Game
         return $this;
     }
 
-    /**
-     * @return Collection<int, NPlateforms>
-     */
-    public function getNPlateforms(): Collection
-    {
-        return $this->nPlateforms;
-    }
-
-    public function addNPlateform(NPlateforms $nPlateform): static
-    {
-        if (!$this->nPlateforms->contains($nPlateform)) {
-            $this->nPlateforms->add($nPlateform);
-            $nPlateform->addPlateform($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNPlateform(NPlateforms $nPlateform): static
-    {
-        if ($this->nPlateforms->removeElement($nPlateform)) {
-            $nPlateform->removePlateform($this);
-        }
-
-        return $this;
-    }
-
     public function getNEditors(): ?NEditors
     {
         return $this->nEditors;
@@ -152,6 +125,30 @@ class Game
     public function setReleaseDate(\DateTimeInterface $releaseDate): static
     {
         $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Platform>
+     */
+    public function getPlatforms(): Collection
+    {
+        return $this->platforms;
+    }
+
+    public function addPlatform(Platform $platform): static
+    {
+        if (!$this->platforms->contains($platform)) {
+            $this->platforms->add($platform);
+        }
+
+        return $this;
+    }
+
+    public function removePlatform(Platform $platform): static
+    {
+        $this->platforms->removeElement($platform);
 
         return $this;
     }

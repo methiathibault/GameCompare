@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Developers;
 use App\Entity\Game;
 use App\Entity\NEditors;
-use App\Entity\NPlateforms;
+use App\Entity\Platform;
 use App\Entity\Offers;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +21,7 @@ class AdminController extends AbstractController
         $offers = $em->getRepository(Offers::class)->findAll();
         $developers = $em->getRepository(Developers::class)->findAll();
         $editors = $em->getRepository(NEditors::class)->findAll();
-        $platforms = $em->getRepository(NPlateforms::class)->findAll();
+        $platforms = $em->getRepository(Platform::class)->findAll();
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',

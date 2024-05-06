@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\NPlateforms;
+use App\Entity\Platform;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<NPlateforms>
+ * @extends ServiceEntityRepository<Platform>
  */
-class NPlateformsRepository extends ServiceEntityRepository
+class PlatformRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, NPlateforms::class);
+        parent::__construct($registry, Platform::class);
     }
 
     //    /**
-    //     * @return NPlateforms[] Returns an array of NPlateforms objects
+    //     * @return Platform[] Returns an array of Platform objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('n.id', 'ASC')
+    //            ->orderBy('p.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?NPlateforms
+    //    public function findOneBySomeField($value): ?Platform
     //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()
