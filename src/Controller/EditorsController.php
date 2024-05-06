@@ -53,7 +53,7 @@ class EditorsController extends AbstractController
 
         if(!$editor) {
             throw $this->createNotFoundException(
-                'No platform found'
+                'No editor found'
             );
         }
 
