@@ -51,7 +51,7 @@ class PlateformsController extends AbstractController
     {
         $platform = $em->getRepository(NPlateforms::class)->find($id);
 
-        if(!$platforms) {
+        if(!$platform) {
             throw $this->createNotFoundException(
                 'No platform found'
             );
