@@ -9,7 +9,39 @@
             <a href='/game/create'>Create game</a>
         </button>
         <button>
-            <a href='/offers/create'>Create game</a>
+            <a href='/offers/create'>Create offer</a>
         </button>
+        <table class='table table-bordered border-dark'>
+            <tr>
+                <td>Entity</td>
+                <td>Action</td>
+            </tr>
+                {% for offer in offers %}
+                    <tr>
+                        <td>{{offer.name}}</td>
+                        <td>
+                            <button>
+                                <a href='offers/delete/{{offer.id}}'>Delete</a>
+                            </button>
+                            <button>
+                                <a href='offers/update/{{offer.id}}'>Update</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for game in games %}
+                    <tr>
+                        <td>{{game.name}}</td>
+                        <td>
+                            <button>
+                                <a href='game/delete/{{game.id}}'>Delete</a>
+                            </button>
+                            <button>
+                                <a href='game/update/{{game.id}}'>Update</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+        </table>
     </div>
 {% endblock %}
