@@ -49,7 +49,7 @@ class PlateformsController extends AbstractController
     #[Route('/plateforms/delete/{id}', name: 'app_plateforms_delete')]
     public function delete(EntityManagerInterface $em, int $id): Response
     {
-        $platforms = $em->getRepository(NPlateforms::class)->find($id);
+        $platform = $em->getRepository(NPlateforms::class)->find($id);
 
         if(!$platforms) {
             throw $this->createNotFoundException(
