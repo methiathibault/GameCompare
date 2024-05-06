@@ -3,9 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Game;
-use App\Entity\Offers;
 use App\Entity\Developers;
-use App\Entity\NPlateforms;
+use App\Entity\Platform;
 use App\Entity\NEditors;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,8 +18,8 @@ class GameFormType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('nPlateforms', EntityType::class, [
-                'class' => NPlateforms::class,
+            ->add('Platforms', EntityType::class, [
+                'class' => Platform::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'label' => 'Plateform',
