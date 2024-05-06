@@ -36,7 +36,7 @@ class GameController extends AbstractController
         $em->remove($game);
         $em->flush();
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('game/deleteall', name: 'app_game_deleteall')]
@@ -55,7 +55,7 @@ class GameController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/game/create', name: 'app_game_create')]
@@ -71,7 +71,7 @@ class GameController extends AbstractController
             $game = $form->getData();
             $em->persist($game);
             $em->flush();
-            return $this->redirectToRoute('app_game');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('game/create.html.twig', [

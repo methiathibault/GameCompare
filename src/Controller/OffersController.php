@@ -41,7 +41,7 @@ class OffersController extends AbstractController
         $em->remove($offerToDelete);
         $em->flush();
 
-        return $this->redirectToRoute('offers');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/offers/deleteall', name: 'offers_delete_all')]
@@ -62,7 +62,7 @@ class OffersController extends AbstractController
         }
         
 
-        return $this->redirectToRoute('offers');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/offers/create', name: 'offers_create')]
@@ -77,7 +77,7 @@ class OffersController extends AbstractController
             $offer= $form->getData();
             $em->persist($offer);
             $em->flush();
-            return $this->redirectToRoute('offers');
+            return $this->redirectToRoute('app_admin');
 
         }
 
