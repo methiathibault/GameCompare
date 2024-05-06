@@ -18,7 +18,7 @@
                     <tr>
                         <td>{{offer.id}}</td>
                         <td>{{offer.name}}</td>
-                        <td>{{offer.game.name}}</td>
+                        <td>{{offer.game.name|default('no game attribued')}}</td>
                         <td>{{offer.price}} €</td>
                         <td>{{offer.offerLink}}</td>
                         <td>

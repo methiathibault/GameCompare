@@ -16,6 +16,7 @@ class GameController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $games = $em->getRepository(Game::class)->findAll();
+
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
             'games' => $games
@@ -52,7 +53,7 @@ class GameController extends AbstractController
 
         foreach ($games as $game) {
             $em->remove($game);
-            $em->flush();
+            $em->flush();  
         }
 
         return $this->redirectToRoute('app_admin');
