@@ -57,7 +57,7 @@ class PlateformsController extends AbstractController
             );
         }
 
-        $em->remove($platforms);
+        $em->remove($platform);
         $em->flush();
 
         return $this->redirectToRoute('app_game');
