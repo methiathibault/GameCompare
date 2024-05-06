@@ -85,4 +85,31 @@ class DevelopersController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/developers/update/{id}', name: 'app_developers_update')]
+    public function updateDev(EntityManagerInterface $em, int $id, Request $request): Response
+    {
+        $dev = $em->getRepository(Developers::class)->find($id);
+
+        if (!$dev) {
+            throw $this->createNotFoundException(
+                'No game found' .$id
+            );
+        }
+
+        $form = $this->createForm(DevFormType::class, $dev);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $dev = $form->getData($dev);
+            $em->persist($dev);
+            $em->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('create.html.twig',[
+            'controller_name' => 'GameController',
+            'form' => $form,
+        ]);
+    } 
 }

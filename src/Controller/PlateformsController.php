@@ -62,4 +62,31 @@ class PlateformsController extends AbstractController
 
         return $this->redirectToRoute('app_game');
     }
+
+    #[Route('/plateforms/update/{id}', name: 'app_plateforms_update')]
+    public function updatePlat(EntityManagerInterface $em, int $id, Request $request): Response
+    {
+        $platform = $em->getRepository(NPlateforms::class)->find($id);
+
+        if (!$platform) {
+            throw $this->createNotFoundException(
+                'No game found' .$id
+            );
+        }
+
+        $form = $this->createForm(PlateformsFormType::class, $platform);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $platform = $form->getData($platform);
+            $em->persist($platform);
+            $em->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('game/create.html.twig',[
+            'controller_name' => 'GameController',
+            'form' => $form,
+        ]);
+    } 
 }

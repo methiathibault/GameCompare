@@ -63,4 +63,31 @@ class EditorsController extends AbstractController
         return $this->redirectToRoute('app_game');
     }
 
+    #[Route('/editors/update/{id}', name: 'app_editors_update')]
+    public function updateEdit(EntityManagerInterface $em, int $id, Request $request): Response
+    {
+        $editor = $em->getRepository(NEditors::class)->find($id);
+
+        if (!$editor) {
+            throw $this->createNotFoundException(
+                'No game found' .$id
+            );
+        }
+
+        $form = $this->createForm(EditorsFormType::class, $editor);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $editor = $form->getData($editor);
+            $em->persist($editor);
+            $em->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('create.html.twig',[
+            'controller_name' => 'GameController',
+            'form' => $form,
+        ]);
+    } 
+
 }
