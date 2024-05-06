@@ -33,7 +33,7 @@ class DevelopersController extends AbstractController
             $developer = $form->getData();
             $em->persist($developer);
             $em->flush();
-            return $this->redirectToRoute('app_game');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('create.html.twig', [
@@ -56,7 +56,7 @@ class DevelopersController extends AbstractController
         $em->remove($developer);
         $em->flush();
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('developers/update/{id}', name: 'app_developers_update')]
@@ -77,7 +77,7 @@ class DevelopersController extends AbstractController
             $developer = $form->getData($developer);
             $em->persist($developer);
             $em->flush();
-            return $this->redirectToRoute('app_game');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('create.html.twig',[

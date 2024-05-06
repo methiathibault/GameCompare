@@ -36,7 +36,7 @@ class PlateformsController extends AbstractController
             $plats = $form->getData();
             $em->persist($plats);
             $em->flush();
-            return $this->redirectToRoute('app_game');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('create.html.twig', [
@@ -60,7 +60,7 @@ class PlateformsController extends AbstractController
         $em->remove($platform);
         $em->flush();
 
-        return $this->redirectToRoute('app_game');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/plateforms/update/{id}', name: 'app_plateforms_update')]
