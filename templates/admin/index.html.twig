@@ -18,7 +18,7 @@
             </tr>
                 {% for offer in offers %}
                     <tr>
-                        <td>{{offer.name}}</td>
+                        <td>{{offer.name}} / Game: {{offer.game.name}}</td>
                         <td>
                             <button>
                                 <a href='offers/delete/{{offer.id}}'>Delete</a>
@@ -31,7 +31,7 @@
                 {% endfor %}
                 {% for game in games %}
                     <tr>
-                        <td>{{game.name}}</td>
+                        <td>Game: {{game.name}}</td>
                         <td>
                             <button>
                                 <a href='game/delete/{{game.id}}'>Delete</a>
