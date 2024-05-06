@@ -70,7 +70,7 @@ class EditorsController extends AbstractController
 
         if (!$editor) {
             throw $this->createNotFoundException(
-                'No game found' .$id
+                'No editor found' .$id
             );
         }
 
