@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PlatformFormType extends AbstractType
 {
@@ -15,6 +16,7 @@ class PlatformFormType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('submit', SubmitType::class)
         ;
     }
 
@@ -25,3 +27,4 @@ class PlatformFormType extends AbstractType
         ]);
     }
 }
+
