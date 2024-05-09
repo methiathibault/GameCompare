@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Offers;
 use App\Entity\Game;
 use App\Entity\Platform;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,17 +14,6 @@ class PageController extends AbstractController
     #[Route('/page', name: 'app_page')]
     public function index(EntityManagerInterface $em): Response
     {
-        $offers = $em->getRepository(Offers::class)->findAll();
-
-        return $this->render('page/index.html.twig', [
-            'controller_name' => 'PageController',
-            'offers' => $offers
-        ]);
-    }
-
-    #[Route('/page/platforms', name: 'app_page_all_platforms')]
-    public function allplatform(EntityManagerInterface $em): Response
-    {
         $games = $em->getRepository(Game::class)->findAll();
         $platforms = $em->getRepository(Platform::class)->findAll();
 
@@ -36,10 +24,12 @@ class PageController extends AbstractController
 
         return $this->render('page/filterPage.html.twig', [
             'games' => $games,
-            'platforms' => $platformType,
+            'platformsType' => $platformType,
             'choice' => "every platforms",
         ]);
     }
+
+   
 
 
     #[Route('/page/platforms/{platformPost}', name: 'app_page_post_platforms')]
@@ -47,7 +37,7 @@ class PageController extends AbstractController
     {
 
         if($platformPost == "all"){
-            return $this->redirectToRoute('app_page_all_platforms');
+            return $this->redirectToRoute('app_page');
         }
 
         $platforms = $em->getRepository(Platform::class)->findAll();
@@ -78,7 +68,7 @@ class PageController extends AbstractController
 
         return $this->render('page/filterPage.html.twig', [
             'games' => $platformGame,
-            'platforms' => $platformType,
+            'platformsType' => $platformType,
             'choice' => $platformPost,
         ]);
     }

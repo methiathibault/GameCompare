@@ -27,3 +27,4 @@ class PlatformFormType extends AbstractType
         ]);
     }
 }
+
