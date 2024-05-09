@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} GAME ON {{choice}}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>GAME ON {{choice}}✅</h1>
+
+    {% for platformType in platformsType %}
+
+    <a href='/page/platforms/{{platformType}}' class="btn-primary btn" role='button'>{{platformType}}</a>
+
+    {% endfor %}
+    <br>
+<br>
+        
+
+<table class='table table-bordered border-dark'>
+            <tr>
+                <td>Game</td>
+                <td>Developer</td>
+                <td>release date</td>
+                <td>editors</td>
+                <td>offers</td>
+            </tr>
+        {% for game in games %}
+        <tr>
+            <td>{{game.name}}</td>
+            <td>{{game.developers.developerName}}</td>
+            
+            <td>{{game.releaseDate|date('Y-m-d')}}</td>
+            <td>{{game.nEditors.name}}</td>
+            <td>
+            {% for offer in game.offers %}
+                <p><a href="{{offer.offerLink}}">{{offer.name}}
+                {{offer.price}} euro</a></p>
+            {% endfor %}
+            </td>
+           </tr>
+        {% endfor %}
+
+</table>
+   
+{% endblock %}
