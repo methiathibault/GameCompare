@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ActivationPlatform;
 use App\Entity\Developers;
 use App\Entity\Game;
 use App\Entity\NEditors;
@@ -22,6 +23,7 @@ class AdminController extends AbstractController
         $developers = $em->getRepository(Developers::class)->findAll();
         $editors = $em->getRepository(NEditors::class)->findAll();
         $platforms = $em->getRepository(Platform::class)->findAll();
+        $activationPlatforms = $em->getRepository(ActivationPlatform::class)->findAll();
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
@@ -30,6 +32,7 @@ class AdminController extends AbstractController
             'developers' => $developers,
             'editors' => $editors,
             'platforms' => $platforms,
+            'activationPlatforms' => $activationPlatforms,
         ]);
     }
 }

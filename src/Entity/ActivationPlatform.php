@@ -2,37 +2,30 @@
 
 namespace App\Entity;
 
-use App\Repository\PlatformRepository;
+use App\Repository\ActivationPlatformRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PlatformRepository::class)]
-class Platform
+#[ORM\Entity(repositoryClass: ActivationPlatformRepository::class)]
+class ActivationPlatform
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 26)]
     private ?string $name = null;
-
-    /**
-     * @var Collection<int, Game>
-     */
-    #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'platforms')]
-    private Collection $games;
 
     /**
      * @var Collection<int, Offers>
      */
-    #[ORM\OneToMany(targetEntity: Offers::class, mappedBy: 'platform')]
+    #[ORM\OneToMany(targetEntity: Offers::class, mappedBy: 'activationPlatform')]
     private Collection $offers;
 
     public function __construct()
     {
-        $this->games = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
 
@@ -54,33 +47,6 @@ class Platform
     }
 
     /**
-     * @return Collection<int, Game>
-     */
-    public function getGames(): Collection
-    {
-        return $this->games;
-    }
-
-    public function addGame(Game $game): static
-    {
-        if (!$this->games->contains($game)) {
-            $this->games->add($game);
-            $game->addPlatform($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGame(Game $game): static
-    {
-        if ($this->games->removeElement($game)) {
-            $game->removePlatform($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Offers>
      */
     public function getOffers(): Collection
@@ -92,7 +58,7 @@ class Platform
     {
         if (!$this->offers->contains($offer)) {
             $this->offers->add($offer);
-            $offer->setPlatform($this);
+            $offer->setActivationPlatform($this);
         }
 
         return $this;
@@ -102,8 +68,8 @@ class Platform
     {
         if ($this->offers->removeElement($offer)) {
             // set the owning side to null (unless already changed)
-            if ($offer->getPlatform() === $this) {
-                $offer->setPlatform(null);
+            if ($offer->getActivationPlatform() === $this) {
+                $offer->setActivationPlatform(null);
             }
         }
 
