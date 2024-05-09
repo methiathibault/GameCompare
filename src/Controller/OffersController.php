@@ -41,7 +41,7 @@ class OffersController extends AbstractController
         $em->remove($offerToDelete);
         $em->flush();
 
-        return $this->redirectToRoute('offers');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/offers/deleteall', name: 'offers_delete_all')]
@@ -62,7 +62,7 @@ class OffersController extends AbstractController
         }
         
 
-        return $this->redirectToRoute('offers');
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/offers/create', name: 'offers_create')]
@@ -71,13 +71,13 @@ class OffersController extends AbstractController
 
         $newOffer = new Offers();
         
-        $form =   $this->createForm(OfferFormType::class, $newOffer);
+        $form = $this->createForm(OfferFormType::class, $newOffer);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $offer= $form->getData();
             $em->persist($offer);
             $em->flush();
-            return $this->redirectToRoute('offers');
+            return $this->redirectToRoute('app_admin');
 
         }
 
@@ -87,5 +87,32 @@ class OffersController extends AbstractController
         ]);
 
         return $this->redirectToRoute('offers');
+    }
+
+    #[Route('offers/update/{id}', name: 'app_offers_update')]
+    public function update(EntityManagerInterface $em, int $id, Request $request): Response
+    {
+        $offer = $em->getRepository(Offers::class)->find($id);
+
+        if (!$offer) {
+            throw $this->createNotFoundException(
+                'No offer found' .$id
+            );
+        }
+
+        $form = $this->createForm(OfferFormType::class, $offer);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $offer = $form->getData($offer);
+            $em->persist($offer);
+            $em->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('offers/create.html.twig',[
+            'controller_name' => 'GameController',
+            'form' => $form,
+        ]);
     }
 }
